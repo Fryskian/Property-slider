@@ -1,0 +1,106 @@
+[
+  {
+    "viewport": 1440,
+    "track": 1344,
+    "card": 319.5,
+    "visible": 4,
+    "nextHint": 1002.5,
+    "photoRatio": 1.7201388301024296,
+    "arrows": "grid",
+    "actions": [
+      48,
+      48,
+      48
+    ],
+    "metaRows": 1,
+    "overflow": false,
+    "snap": "x mandatory",
+    "brokenImages": 0
+  },
+  {
+    "viewport": 1024,
+    "track": 928,
+    "card": 381.265625,
+    "visible": 2,
+    "nextHint": 526.734375,
+    "photoRatio": 1.7200255102040816,
+    "arrows": "grid",
+    "actions": [
+      48,
+      48,
+      48
+    ],
+    "metaRows": 1,
+    "overflow": false,
+    "snap": "x mandatory",
+    "brokenImages": 0
+  },
+  {
+    "viewport": 768,
+    "track": 672,
+    "card": 272.328125,
+    "visible": 2,
+    "nextHint": 379.671875,
+    "photoRatio": 1.7201232849473056,
+    "arrows": "grid",
+    "actions": [
+      48,
+      48,
+      48
+    ],
+    "metaRows": 1,
+    "overflow": false,
+    "snap": "x mandatory",
+    "brokenImages": 0
+  },
+  {
+    "viewport": 390,
+    "track": 374,
+    "card": 347.09375,
+    "visible": 1,
+    "nextHint": 14.90625,
+    "photoRatio": 1.3333735812605652,
+    "arrows": "none",
+    "actions": [
+      48,
+      48,
+      48
+    ],
+    "metaRows": 1,
+    "overflow": false,
+    "snap": "x mandatory",
+    "brokenImages": 0
+  },
+  {
+    "viewport": 320,
+    "track": 304,
+    "card": 284,
+    "visible": 1,
+    "nextHint": 8,
+    "photoRatio": 1.3333333333333333,
+    "arrows": "none",
+    "actions": [
+      48,
+      48,
+      48
+    ],
+    "metaRows": 1,
+    "overflow": false,
+    "snap": "x mandatory",
+    "brokenImages": 0
+  },
+  {
+    "check": "late theme CSS",
+    "passed": true
+  },
+  {
+    "check": "Chromium synthesized touch swipe",
+    "left": 359,
+    "step": 359.09375,
+    "snapError": 0.00026107388390916864
+  },
+  {
+    "check": "vertical touch page scroll",
+    "passed": true
+  }
+]

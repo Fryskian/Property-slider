@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Property Slider Free
  * Description: Property CPT, editable fields and responsive slider for WordPress/Elementor Free. No ACF or Elementor Pro required.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Fryskian
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,7 +13,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'PSF_VERSION', '1.0.0' );
+define( 'PSF_VERSION', '1.1.0' );
 define( 'PSF_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PSF_URL', plugin_dir_url( __FILE__ ) );
 
@@ -132,16 +132,16 @@ function psf_render_slider( $args = array() ) {
 
     ob_start(); ?>
     <section class="psf" data-default-filter="<?php echo esc_attr( $default ); ?>">
-        <div class="psf__topbar"><h2 class="psf__title"><?php echo esc_html( $args['title'] ); ?></h2><?php if ( $show_filters ) : ?><div class="psf__tabs" role="tablist" aria-label="<?php esc_attr_e( 'Property listing type', 'property-slider-free' ); ?>"><button class="psf__tab" type="button" data-filter="sale" role="tab"><?php esc_html_e( 'For sale', 'property-slider-free' ); ?></button><button class="psf__tab" type="button" data-filter="rent" role="tab"><?php esc_html_e( 'To rent', 'property-slider-free' ); ?></button></div><?php endif; ?></div>
-        <div class="psf__slider-shell"><button class="psf__arrow psf__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous properties', 'property-slider-free' ); ?>"><?php echo psf_icon( 'left' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button><div class="psf__track" tabindex="0">
+        <div class="psf__topbar"><h2 class="psf__title"><?php echo esc_html( $args['title'] ); ?></h2><?php if ( $show_filters ) : ?><div class="psf__tabs" role="group" aria-label="<?php esc_attr_e( 'Property listing type', 'property-slider-free' ); ?>"><button class="psf__tab" type="button" data-filter="sale" aria-pressed="false"><?php esc_html_e( 'For sale', 'property-slider-free' ); ?></button><button class="psf__tab" type="button" data-filter="rent" aria-pressed="false"><?php esc_html_e( 'To rent', 'property-slider-free' ); ?></button></div><?php endif; ?></div>
+        <div class="psf__slider-shell"><button class="psf__arrow psf__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous properties', 'property-slider-free' ); ?>"><?php echo psf_icon( 'left' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button><div class="psf__track" tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Properties', 'property-slider-free' ); ?>">
         <?php while ( $q->have_posts() ) : $q->the_post(); $id = get_the_ID(); $m = function( $key ) use ( $id ) { return get_post_meta( $id, $key, true ); }; $listing = $m( '_psf_listing_type' ) ?: 'sale'; ?>
             <article class="psf-card" data-listing-type="<?php echo esc_attr( $listing ); ?>" data-property-id="<?php echo esc_attr( $id ); ?>">
-                <a class="psf-card__image" href="<?php the_permalink(); ?>"><?php if ( has_post_thumbnail() ) the_post_thumbnail( 'large', array( 'loading' => 'lazy' ) ); else echo '<span class="psf-card__placeholder">' . esc_html__( 'Property photo', 'property-slider-free' ) . '</span>'; ?></a>
-                <div class="psf-card__body"><div class="psf-card__price-row"><strong class="psf-card__price"><?php echo esc_html( $m( '_psf_price' ) ?: get_the_title() ); ?></strong><?php if ( $m( '_psf_price_note' ) ) : ?><span class="psf-card__price-note"><?php echo esc_html( $m( '_psf_price_note' ) ); ?></span><?php endif; ?></div><a class="psf-card__address" href="<?php the_permalink(); ?>"><?php echo esc_html( $m( '_psf_address' ) ?: get_the_title() ); ?></a><div class="psf-card__meta"><?php if ( $m( '_psf_property_type' ) ) : ?><span class="psf-card__type"><?php echo esc_html( $m( '_psf_property_type' ) ); ?></span><?php endif; ?><?php foreach ( array( 'beds' => 'bed', 'baths' => 'bath', 'parking' => 'car' ) as $field => $icon ) : $v = $m( '_psf_' . $field ); if ( '' !== (string) $v ) : ?><span><?php echo psf_icon( $icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><b><?php echo esc_html( $v ); ?></b></span><?php endif; endforeach; ?></div></div>
+                <a class="psf-card__image" aria-label="<?php echo esc_attr( get_the_title() ); ?>" href="<?php the_permalink(); ?>"><?php if ( has_post_thumbnail() ) the_post_thumbnail( 'large', array( 'loading' => 'lazy' ) ); else echo '<span class="psf-card__placeholder">' . esc_html__( 'Property photo', 'property-slider-free' ) . '</span>'; ?></a>
+                <div class="psf-card__body"><div class="psf-card__price-row"><strong class="psf-card__price"><?php echo esc_html( $m( '_psf_price' ) ?: get_the_title() ); ?></strong><?php if ( $m( '_psf_price_note' ) ) : ?><span class="psf-card__price-note"><?php echo esc_html( $m( '_psf_price_note' ) ); ?></span><?php endif; ?></div><a class="psf-card__address" href="<?php the_permalink(); ?>"><?php echo esc_html( $m( '_psf_address' ) ?: get_the_title() ); ?></a><?php if ( $m( '_psf_property_type' ) ) : ?><span class="psf-card__type"><?php echo esc_html( $m( '_psf_property_type' ) ); ?></span><?php endif; ?><div class="psf-card__meta"><?php foreach ( array( 'beds' => 'bed', 'baths' => 'bath', 'parking' => 'car' ) as $field => $icon ) : $v = $m( '_psf_' . $field ); if ( '' !== (string) $v ) : ?><span aria-label="<?php echo esc_attr( sprintf( '%s: %s', psf_field_defs()[ $field ][1], $v ) ); ?>"><?php echo psf_icon( $icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><b><?php echo esc_html( $v ); ?></b></span><?php endif; endforeach; ?></div></div>
                 <div class="psf-card__actions"><?php if ( $m( '_psf_email' ) ) : ?><a href="mailto:<?php echo esc_attr( antispambot( $m( '_psf_email' ) ) ); ?>"><?php echo psf_icon( 'mail' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e( 'Email', 'property-slider-free' ); ?></span></a><?php endif; ?><?php if ( $m( '_psf_phone' ) ) : ?><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $m( '_psf_phone' ) ) ); ?>"><?php echo psf_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e( 'Call', 'property-slider-free' ); ?></span></a><?php endif; ?><button class="psf-card__save" type="button" aria-pressed="false"><?php echo psf_icon( 'heart' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e( 'Save', 'property-slider-free' ); ?></span></button></div>
             </article>
         <?php endwhile; wp_reset_postdata(); ?>
-        </div><button class="psf__arrow psf__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next properties', 'property-slider-free' ); ?>"><?php echo psf_icon( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button></div><p class="psf__no-results" hidden><?php esc_html_e( 'No properties in this category yet.', 'property-slider-free' ); ?></p>
+        </div><button class="psf__arrow psf__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next properties', 'property-slider-free' ); ?>"><?php echo psf_icon( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button></div><p class="psf__no-results" role="status" hidden><?php esc_html_e( 'No properties in this category yet.', 'property-slider-free' ); ?></p>
     </section>
     <?php return ob_get_clean();
 }
@@ -152,7 +152,7 @@ function psf_property_slider_shortcode( $atts ) {
 add_shortcode( 'property_slider', 'psf_property_slider_shortcode' );
 
 function psf_register_elementor_widget( $widgets_manager ) {
-    if ( ! class_exists( '\\Elementor\\Widget_Base' ) ) return;
+    if ( ! class_exists( '\Elementor\Widget_Base' ) ) return;
     require_once PSF_DIR . 'includes/class-psf-elementor-widget.php';
     $widgets_manager->register( new \PSF_Elementor_Widget() );
 }
