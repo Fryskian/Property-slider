@@ -1,5 +1,6 @@
 === Property Slider Free ===
 Contributors: fryskian
+Stable tag: 1.1.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -33,7 +34,7 @@ Shortcode example:
 == Limitations ==
 
 * Theme or page-builder CSS can override the component. Broad global heading/link/button/grid/image rules and !important declarations can change or break the intended appearance. Small CSS overrides may be required on some themes.
-* The preview is a design target, not a pixel-perfect promise across every theme, font, width, and browser.
+* The HTML preview is exported from the actual renderer. Screenshots show a WordPress/Elementor Free test installation; results can differ across themes, fonts, widths and browsers.
 * Single-property and archive pages use the active theme; this plugin does not ship full property templates.
 * One Featured Image per card; no gallery or lightbox.
 * Sale/rent filtering is client-side and only filters the properties already loaded by the shortcode limit.
@@ -50,3 +51,12 @@ Shortcode example:
 For MU-plugin use, put the folder in wp-content/mu-plugins/ and add a loader PHP file directly in wp-content/mu-plugins/:
 
 <?php require WPMU_PLUGIN_DIR . '/property-slider-free/property-slider-free.php';
+
+== Changelog ==
+
+= 1.1.0 =
+* Four desktop cards, fractional tablet cards, 89vw mobile cards and 4:3 mobile photos.
+* 48px contact/save targets, compact metadata and native scroll-snap.
+* Scoped CSS and a limited cascade guard layer for common theme conflicts.
+* Fix Elementor widget registration and dynamic initialization; respect reduced motion.
+* Actual Elementor screenshots, Unsplash demo photographs and exported interactive HTML.
