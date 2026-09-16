@@ -4,7 +4,7 @@ A small, copyleft WordPress property-listing slider built for a simple use case:
 
 It registers a `Properties` custom post type, stores the listing fields as native WordPress post meta, and renders the cards either through a shortcode or an Elementor Free widget.
 
-![Property Slider preview](preview/property-slider-preview.png)
+![Property Slider preview](preview/property-slider-preview.svg)
 
 ## Features
 
